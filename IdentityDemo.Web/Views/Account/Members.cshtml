@@ -1,0 +1,11 @@
+﻿<h3>Members</h3>
+@if (User.Identity!.IsAuthenticated)
+{
+    <p>
+        Welcome <strong>@User.Identity!.Name</strong>!
+    </p>
+}
+else
+{
+    <p>Du är inte inloggad...</p>
+}

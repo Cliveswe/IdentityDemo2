@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityDemo.Application.Cars
+namespace IdentityDemo.Application.Cars.Interfaces
 {
     public interface ICarRepository
     {

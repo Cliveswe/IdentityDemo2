@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IdentityDemo.Application.Dtos;
 using IdentityDemo.Domain.Entities;
 
-namespace IdentityDemo.Application.Cars
+namespace IdentityDemo.Application.Cars.Interfaces
 {
     public interface ICarService
     {

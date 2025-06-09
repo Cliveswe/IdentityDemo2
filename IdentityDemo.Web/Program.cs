@@ -1,7 +1,8 @@
-﻿using IdentityDemo.Application.Cars;
-using IdentityDemo.Application.Users;
+﻿using IdentityDemo.Application.Cars.Interfaces;
+using IdentityDemo.Application.Cars.Services;
+using IdentityDemo.Application.Users.Interfaces;
+using IdentityDemo.Application.Users.Services;
 using IdentityDemo.Infrastructure.Persistence;
-using IdentityDemo.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;

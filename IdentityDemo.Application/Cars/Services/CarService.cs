@@ -1,4 +1,4 @@
-﻿using IdentityDemo.Application.Cars;
+﻿using IdentityDemo.Application.Cars.Interfaces;
 using IdentityDemo.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityDemo.Infrastructure.Services
+namespace IdentityDemo.Application.Cars.Services
 {
     public class CarService : ICarService
     {

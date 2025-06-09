@@ -8,5 +8,6 @@ namespace IdentityDemo.Application.Dtos
 {
     public class CarDto
     {
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using IdentityDemo.Web.Views.Account;
+﻿using IdentityDemo.Application.Cars;
+using IdentityDemo.Web.Views.Account;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -6,7 +7,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 namespace IdentityDemo.Web.Controllers
 {
     [Route("car")]
-    public class CarController : Controller
+    public class CarController(ICarService carService) : Controller
     {
         [HttpGet("details/{id}")]
         public IActionResult Details(int id, string name, int age)

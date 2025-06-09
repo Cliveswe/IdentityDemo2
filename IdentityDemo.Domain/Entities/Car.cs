@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IdentityDemo.Domain.Entities
 {
-    internal class Car
+    public class Car
     {
         public int Id { get; set; }
         public string Make { get; set; } = string.Empty;

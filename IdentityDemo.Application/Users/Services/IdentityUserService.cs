@@ -1,6 +1,6 @@
 ﻿using IdentityDemo.Application.Dtos;
 using IdentityDemo.Application.Users.Interfaces;
-using IdentityDemo.Infrastructure.Persistance;
+using IdentityDemo.Infrastructure.Persistence;
 
 namespace IdentityDemo.Application.Users.Services;
 public class IdentityUserService(

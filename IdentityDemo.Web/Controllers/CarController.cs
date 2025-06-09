@@ -53,7 +53,7 @@ namespace IdentityDemo.Web.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateAsync(CreateVM viewModel)
+        public async Task<IActionResult> Create(CreateVM viewModel)
         {
             if (!ModelState.IsValid)
                 return View();
@@ -67,7 +67,6 @@ namespace IdentityDemo.Web.Controllers
 
             await carService.AddAsync(model);
             return View();
-            //return RedirectToAction(nameof(Index));
         }
     }
 }

@@ -1,0 +1,17 @@
+﻿@model AllDetailsVM
+
+@{
+    ViewBag.Title = "All Cars";
+}
+
+<div>
+    <ul>
+    @foreach (var car in Model.CarVMs)
+    {
+        <li>@car.Make </li>
+        <li>@car.Model</li>
+        <li>@car.Year</li>
+        <br/>
+    }
+    </ul>
+</div>

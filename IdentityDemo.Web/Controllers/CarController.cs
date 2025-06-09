@@ -26,6 +26,25 @@ namespace IdentityDemo.Web.Controllers
             return View(viewModel);
         }
 
+        [HttpGet("details")]
+        public async Task<IActionResult> AllDetails()
+        {
+            var cars = await carService.GetAllAsync();
+
+            var viewModel = new AllDetailsVM()
+            {
+                CarVMs = [.. cars
+                    .Select(c => new AllDetailsVM.CarVM()
+                    {
+                        Make = c.Make,
+                        Model = c.Model,
+                        Year = c.Year
+                    })]
+            };
+
+            return View(viewModel);
+        }
+
         [HttpGet("create")]
         public IActionResult Create()
         {

@@ -17,7 +17,9 @@ public class Program
         builder.Services.AddTransient<IUserService, UserService>();
         builder.Services.AddTransient<IIdentityUserService, IdentityUserService>();
         builder.Services.AddTransient<ICarService, CarService>();
+        builder.Services.AddTransient<ICarRepository, CarRepository>();
 
+        builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
         // Konfigurera EF
         builder.Services.AddDbContext<ApplicationContext>(
             o => o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

@@ -12,10 +12,18 @@ namespace IdentityDemo.Web.Controllers
     public class CarController(ICarService carService) : Controller
     {
         [HttpGet("details/{id}")]
-        public IActionResult Details(int id, string name, int age)
+        public async Task<IActionResult> Details(int id)
         {
-            //return Json(new { Name = "Lille Bo", Age = 5 });
-            return Content($"I Details, Id: {id}");
+            var car = await carService.GetByIdAsync(id);
+
+            var viewModel = new DetailsVM
+            {
+                Make = car.Make,
+                Model = car.Model,
+                Year = car.Year
+            };
+
+            return View(viewModel);
         }
 
         [HttpGet("create")]

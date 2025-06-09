@@ -5,24 +5,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IdentityDemo.Infrastructure.Persistence;
 
 namespace IdentityDemo.Infrastructure.Services
 {
-    public class CarService : ICarService
+    public class CarService(IUnitOfWork unitOfWork) : ICarService
     {
-        public Task AddAsync(Car car)
+        public async Task AddAsync(Car car)
         {
-            throw new NotImplementedException();
+            await unitOfWork.Cars.AddAsync(car);
         }
 
-        public Task<Car[]> GetAllAsync()
+        public async Task<Car[]> GetAllAsync()
         {
-            throw new NotImplementedException();
+            var cars = await unitOfWork.Cars.GetAllAsync();
+            return [.. cars.OrderBy(c => c.Make)];
         }
 
-        public Task<Car?> GetByIdAsync(int id)
+        public async Task<Car?> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            var car = await unitOfWork.Cars.GetByIdAsync(id);
+
+            return car is null ?
+                throw new ArgumentException($"Invalid parameter value: {id}", nameof(id)) :
+                car;
         }
     }
 }

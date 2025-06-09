@@ -1,7 +1,7 @@
 ﻿// Ignore Spelling: Admin
 
 using IdentityDemo.Application.Dtos;
-using IdentityDemo.Application.Users.Interfaces;
+using IdentityDemo.Application.Users;
 using IdentityDemo.Web.Views.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

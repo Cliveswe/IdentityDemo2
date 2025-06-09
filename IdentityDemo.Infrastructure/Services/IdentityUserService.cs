@@ -1,8 +1,9 @@
 ﻿using IdentityDemo.Application.Dtos;
-using IdentityDemo.Application.Users.Interfaces;
-using IdentityDemo.Infrastructure.Persistance;
+using IdentityDemo.Application.Users;
+using IdentityDemo.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
 
-namespace IdentityDemo.Application.Users.Services;
+namespace IdentityDemo.Infrastructure.Services;
 public class IdentityUserService(
     UserManager<ApplicationUser> userManager,
     SignInManager<ApplicationUser> signInManager,

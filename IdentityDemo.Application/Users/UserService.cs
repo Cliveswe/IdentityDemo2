@@ -1,12 +1,11 @@
 ﻿using IdentityDemo.Application.Dtos;
-using IdentityDemo.Application.Users.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IdentityDemo.Application.Users.Services;
+namespace IdentityDemo.Application.Users;
 public class UserService(IIdentityUserService identityUserService) : IUserService
 {
     public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password) =>

@@ -7,7 +7,13 @@
 </head>
 <body style="padding: 1rem;">
     <nav>
-        <a asp-controller="Account" asp-action="Members">Members</a>
+        @if (User.IsInRole("Administrator"))
+        {
+            <a asp-controller="Account" asp-action="Admin">Admins</a>
+        } else
+        {
+            <a asp-controller="Account" asp-action="Members">Members</a>
+        }
         <a asp-controller="Account" asp-action="Register">Register</a>
         <a asp-controller="Account" asp-action="LogIn">Login</a>
         <a asp-controller="Account" asp-action="LogOut">Logout</a>

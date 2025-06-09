@@ -1,4 +1,5 @@
-﻿using IdentityDemo.Application.Users;
+﻿using IdentityDemo.Application.Cars;
+using IdentityDemo.Application.Users;
 using IdentityDemo.Infrastructure.Persistence;
 using IdentityDemo.Infrastructure.Services;
 using Microsoft.AspNetCore.Identity;
@@ -15,6 +16,7 @@ public class Program
         builder.Services.AddControllersWithViews();
         builder.Services.AddTransient<IUserService, UserService>();
         builder.Services.AddTransient<IIdentityUserService, IdentityUserService>();
+        builder.Services.AddTransient<ICarService, CarService>();
 
         // Konfigurera EF
         builder.Services.AddDbContext<ApplicationContext>(

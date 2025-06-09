@@ -12,24 +12,22 @@ public class IdentityUserService(
     public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password) {
         const string roleName = "Administrator";
 
-
-        var result = await userManager.CreateAsync(new ApplicationUser {
+        var applicationUser = new ApplicationUser {
             UserName = user.Email,
             Email = user.Email,
             FirstName = user.FirstName,
             LastName = user.LastName
-        }, password);
+        };
+        var result = await userManager.CreateAsync(applicationUser, password);
 
         if(user.Email.Contains("admin")) {
 
             if(!await roleManager.RoleExistsAsync(roleName)) {
                 // Skapa en ny roll
-                var resultRole = await roleManager.CreateAsync(new IdentityRole(roleName));
+                await roleManager.CreateAsync(new IdentityRole(roleName));
             }
-
             // Lägg till en användare till en roll
-            //await userManager.AddToRoleAsync(resultRole, roleName);
-
+            await userManager.AddToRoleAsync(applicationUser, roleName);
         }
         return new UserResultDto(result.Errors.FirstOrDefault()?.Description);
     }

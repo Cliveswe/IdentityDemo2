@@ -18,7 +18,7 @@ namespace IdentityDemo.Web.Controllers
 
             var viewModel = new DetailsVM
             {
-                Make = car.Make,
+                Make = car!.Make,
                 Model = car.Model,
                 Year = car.Year
             };

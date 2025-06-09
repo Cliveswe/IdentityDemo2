@@ -70,4 +70,12 @@ public class AccountController(IUserService userService) : Controller
         // Redirect user
         return RedirectToAction(nameof(Members));
     }
+
+    [HttpGet("logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await userService.SignOutAsync();
+
+        return RedirectToAction(nameof(LoginAsync).Replace("Async", ""));
+    }
 }

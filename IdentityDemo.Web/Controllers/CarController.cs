@@ -1,5 +1,7 @@
 ﻿using IdentityDemo.Application.Cars;
+using IdentityDemo.Domain.Entities;
 using IdentityDemo.Web.Views.Account;
+using IdentityDemo.Web.Views.Car;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -31,8 +33,9 @@ namespace IdentityDemo.Web.Controllers
 
             var model = new Car
             {
-                CompanyName = viewModel.CompanyName,
-                City = viewModel.City,
+                Make = viewModel.Make,
+                Model = viewModel.Model,
+                Year = viewModel.Year
             };
 
             await carService.AddAsync(model);

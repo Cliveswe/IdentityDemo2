@@ -1,6 +1,6 @@
 ﻿using IdentityDemo.Application.Cars;
 
-namespace IdentityDemo.Infrastructure.Persistence
+namespace IdentityDemo.Application
 {
     public interface IUnitOfWork
     {

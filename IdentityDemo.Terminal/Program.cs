@@ -1,8 +1,8 @@
 ﻿using IdentityDemo.Infrastructure.Persistence;
-using IdentityDemo.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using IdentityDemo.Infrastructure.Persistence;
+using IdentityDemo.Application.Cars;
 
 namespace IdentityDemo.Terminal;
 

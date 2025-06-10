@@ -1,4 +1,5 @@
-﻿using IdentityDemo.Application.Cars;
+﻿using IdentityDemo.Application;
+using IdentityDemo.Application.Cars;
 using IdentityDemo.Application.Users;
 using IdentityDemo.Infrastructure.Persistence;
 using IdentityDemo.Infrastructure.Services;
@@ -34,7 +35,8 @@ public class Program
         }).AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
 
         // Identity: Hit ska icke inloggade användare skikas (om de besöker skyddade sidor)
-        builder.Services.ConfigureApplicationCookie(o => {
+        builder.Services.ConfigureApplicationCookie(o =>
+        {
             o.LoginPath = "/login";
             o.LogoutPath = "/logout";
         });

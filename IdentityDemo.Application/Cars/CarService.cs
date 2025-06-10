@@ -1,13 +1,12 @@
-﻿using IdentityDemo.Application.Cars;
-using IdentityDemo.Domain.Entities;
+﻿using IdentityDemo.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IdentityDemo.Infrastructure.Persistence;
+using IdentityDemo.Application;
 
-namespace IdentityDemo.Infrastructure.Services
+namespace IdentityDemo.Application.Cars
 {
     public class CarService(IUnitOfWork unitOfWork) : ICarService
     {

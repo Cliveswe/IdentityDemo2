@@ -2,10 +2,10 @@
 {
     public class UserServiceTests
     {
-        //[Fact]
-        //public void Test1()
-        //{
+        [Fact]
+        public void Test1()
+        {
 
-        //}
+        }
     }
 }

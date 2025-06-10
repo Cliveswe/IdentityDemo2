@@ -16,6 +16,8 @@ namespace IdentityDemo.Application.Tests
         {
             // Arrange
             var mockUnitOfWork = new Mock<IUnitOfWork>();
+            var mockCarRepository = new Mock<ICarRepository>();
+            mockUnitOfWork.Setup(u => u.Cars).Returns(mockCarRepository.Object);
             var carService = new CarService(mockUnitOfWork.Object);
 
             var car = new Car()
@@ -31,6 +33,12 @@ namespace IdentityDemo.Application.Tests
             // Assert
             mockUnitOfWork.Verify(u => u.Cars.AddAsync(It.Is<Car>
                 (c => c.Make == "TestMake" && c.Model == "TestModel" && c.Year == 2022)), Times.Once);
+        }
+
+
+        [Fact]
+        public async Task GetAllAsync_ReturnsListOfCars()
+        {
         }
     }
 }

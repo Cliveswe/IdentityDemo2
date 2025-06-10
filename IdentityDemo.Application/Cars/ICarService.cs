@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using IdentityDemo.Application.Dtos;
-using IdentityDemo.Domain.Entities;
+﻿using IdentityDemo.Domain.Entities;
 
 namespace IdentityDemo.Application.Cars
 {
@@ -12,6 +6,6 @@ namespace IdentityDemo.Application.Cars
     {
         Task AddAsync(Car car);
         Task<Car[]> GetAllAsync();
-        Task<Car?> GetByIdAsync(int id);
+        Task<Car> GetByIdAsync(int id);
     }
 }

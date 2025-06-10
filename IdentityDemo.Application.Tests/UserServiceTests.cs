@@ -24,6 +24,38 @@ namespace IdentityDemo.Application.Tests
             mockIdentityUserService.Verify(s => s.CreateUserAsync(user, "Password_123"), Times.Once);
         }
 
+        [Fact]
+        public async Task SignInAsync_ValidEmailAndPassword()
+        {
+            // Arrange
+            var mockIdentityUserService = new Mock<IIdentityUserService>();
+            var userService = new UserService(mockIdentityUserService.Object);
+            var userResult = new UserResultDto(null);
+            mockIdentityUserService.Setup(s =>
+                s.SignInAsync("test@mail.com", "Password_123")).ReturnsAsync(userResult);
 
+            // Act
+
+            var result = await userService.SignInAsync("test@mail.com", "Password_123");
+
+            // Assert
+            Assert.Equal(userResult, result);
+            mockIdentityUserService.Verify(s => s.SignInAsync("test@mail.com", "Password_123"), Times.Once);
+        }
+
+        [Fact]
+        public async Task SignOutAsync_Test()
+        {
+            // Arrange
+            var mockIdentityUserService = new Mock<IIdentityUserService>();
+            var userService = new UserService(mockIdentityUserService.Object);
+
+            // Act
+            await userService.SignOutAsync();
+
+            // Assert
+
+            mockIdentityUserService.Verify(s => s.SignOutAsync(), Times.Once);
+        }
     }
 }

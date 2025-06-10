@@ -30,6 +30,12 @@ namespace IdentityDemo.Application.Tests
         }
 
 
+        [Fact]
+        public async Task GetAllAsync_ReturnsListOfCars()
+        {
+        }
+
+
         [Theory]
         [InlineData(1, true)]
         [InlineData(2, false)]

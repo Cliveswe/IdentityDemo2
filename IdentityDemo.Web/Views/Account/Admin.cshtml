@@ -1,4 +1,5 @@
-﻿@{
+﻿@model AdminVM
+@{
     ViewBag.Title = "Admin";
 }
 
@@ -8,8 +9,9 @@
     @if (User.Identity!.IsAuthenticated)
     {
         <p>
-            Welcome <strong>@User.Identity.Name</strong>!
+            Welcome <strong>@User.Identity.Name</strong>!<br/>
         </p>
+        <p>@Model.FirstName @Model.LastName</p>
     }
     else
     {

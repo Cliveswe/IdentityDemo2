@@ -5,6 +5,7 @@ using IdentityDemo.Application.Users;
 using IdentityDemo.Web.Views.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace IdentityDemo.Web.Controllers;
 
@@ -12,19 +13,42 @@ public class AccountController(IUserService userService) : Controller
 {
     [Authorize(Roles = "Administrator")]
     [HttpGet("admin")]
-    public IActionResult Admin()
+    public async Task<IActionResult> Admin()
     {
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var user = await userService.GetUserByIdAsync(userId!);
 
-        return View();
+        if (user == null)
+            return NotFound();
+
+        var viewModel = new AdminVM()
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+        };
+
+        return View(viewModel);
     }
 
 
     [Authorize]
     [HttpGet("")]
     [HttpGet("members")]
-    public IActionResult Members()
+    public async Task<IActionResult> Members()
     {
-        return View();
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var user = await userService.GetUserByIdAsync(userId!);
+
+        if (user == null)
+            return NotFound();
+
+        var viewModel = new MembersVM()
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+        };
+
+        return View(viewModel);
     }
 
     [HttpGet("register")]

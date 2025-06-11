@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MembersVM
+@{
     ViewBag.Title = "Members";
     ViewData["BodyClass"] = "members-bg";
 }
@@ -11,7 +12,9 @@
     {
         <p class="text-outline">
             Welcome <strong>@User.Identity.Name</strong>!
+            <br/>
         </p>
+        <p>@Model.FirstName @Model.LastName</p>
     }
     else
     {

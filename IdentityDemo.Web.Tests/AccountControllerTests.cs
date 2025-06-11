@@ -6,6 +6,7 @@ using IdentityDemo.Application.Users;
 using IdentityDemo.Application.Dtos;
 using IdentityDemo.Web.Views.Account;
 using Microsoft.AspNetCore.Http;
+using StackExchange.Redis;
 
 namespace IdentityDemo.Web.Tests;
 
@@ -69,5 +70,23 @@ public class AccountControllerTests
         var viewResult = Assert.IsType<RedirectToActionResult>(result);
         Assert.Equal(expected, viewResult.ActionName);
         mockUserService.Verify(s => s.SignInAsync(loginVM.Username, loginVM.Password), Times.Once);
+    }
+
+    [Fact]
+    public async Task Logout_WithLoggedInUser_ReturnsRedirectToActionResult()
+    {
+        // Arrange
+        var mockUserService = new Mock<IUserService>();
+
+        var accountController = new AccountController(mockUserService.Object);
+
+        mockUserService.Setup(s => s.SignOutAsync());
+        // Act
+        var result = await accountController.Logout();
+
+        // Assert
+        var viewResult = Assert.IsType<RedirectToActionResult>(result);
+        Assert.Equal("Login", viewResult.ActionName);
+        mockUserService.Verify(s => s.SignOutAsync(), Times.Once);
     }
 }

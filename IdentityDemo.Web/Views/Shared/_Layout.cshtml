@@ -10,13 +10,18 @@
         @if (User.IsInRole("Administrator"))
         {
             <a asp-controller="Account" asp-action="Admin">Admins</a>
-        } else
+        } 
+        <a asp-controller="Account" asp-action="Members">Members</a>
+        @if (User.Identity!.IsAuthenticated)
         {
-            <a asp-controller="Account" asp-action="Members">Members</a>
+            <a asp-controller="Account" asp-action="LogOut">Logout</a>
+            <a asp-controller="Car" asp-action="AllDetails">Show cars</a>
         }
-        <a asp-controller="Account" asp-action="Register">Register</a>
-        <a asp-controller="Account" asp-action="LogIn">Login</a>
-        <a asp-controller="Account" asp-action="LogOut">Logout</a>
+        else
+        {
+            <a asp-controller="Account" asp-action="Register">Register</a>
+            <a asp-controller="Account" asp-action="LogIn">Login</a>
+        }
     </nav>
     <br />
     <div>

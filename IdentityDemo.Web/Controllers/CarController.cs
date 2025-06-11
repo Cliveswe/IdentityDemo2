@@ -36,6 +36,7 @@ namespace IdentityDemo.Web.Controllers
                 CarVMs = [.. cars
                     .Select(c => new AllDetailsVM.CarVM()
                     {
+                        Id = c.Id,
                         Make = c.Make,
                         Model = c.Model,
                         Year = c.Year

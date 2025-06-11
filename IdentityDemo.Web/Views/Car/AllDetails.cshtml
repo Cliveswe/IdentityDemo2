@@ -8,10 +8,13 @@
     <ul>
     @foreach (var car in Model.CarVMs)
     {
-        <li>@car.Make </li>
-        <li>@car.Model</li>
-            <li>@car.Year<br /></li>
-        
+        <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
+            <li>
+                @car.Make<br/>
+                @car.Model<br/>
+                @car.Year<br/>
+            </li>
+        </a>
     }
     </ul>
 </div>

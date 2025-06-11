@@ -1,9 +1,11 @@
-﻿using IdentityDemo.Web.Controllers;
+﻿using System.Security.Claims;
+using IdentityDemo.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using IdentityDemo.Application.Users;
 using IdentityDemo.Application.Dtos;
 using IdentityDemo.Web.Views.Account;
+using Microsoft.AspNetCore.Http;
 
 namespace IdentityDemo.Web.Tests;
 
@@ -31,12 +33,30 @@ public class AccountControllerTests
         mockUserService.Verify(s => s.CreateUserAsync(userDto, registerVM.Password), Times.Once);
     }
 
-    [Fact]
-    public async Task Login_WithValidInput_ReturnsRedirectToActionResult()
+    [Theory]
+    [InlineData("Administrator", "Admin")]
+    [InlineData("", "Members")]
+    public async Task Login_WithValidInput_ReturnsRedirectToActionResult(string role, string expected)
     {
         // Arrange
         var mockUserService = new Mock<IUserService>();
+
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.Role, role)
+        };
+        var identity = new ClaimsIdentity(claims, "mock");
+        var user = new ClaimsPrincipal(identity);
+
         var accountController = new AccountController(mockUserService.Object);
+        accountController.ControllerContext = new ControllerContext
+        {
+            HttpContext = new DefaultHttpContext
+            {
+                User = user
+            }
+        };
+
         var loginVM = new LoginVM() { Username = "John@mail.com", Password = "Password_123" };
         var userResult = new UserResultDto(null);
         mockUserService.Setup(s => s.SignInAsync(loginVM.Username, loginVM.Password))
@@ -47,7 +67,7 @@ public class AccountControllerTests
 
         // Assert
         var viewResult = Assert.IsType<RedirectToActionResult>(result);
-        Assert.Equal("Members", viewResult.ActionName);
+        Assert.Equal(expected, viewResult.ActionName);
         mockUserService.Verify(s => s.SignInAsync(loginVM.Username, loginVM.Password), Times.Once);
     }
 }

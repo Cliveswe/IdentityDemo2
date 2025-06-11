@@ -2,6 +2,7 @@
 using IdentityDemo.Domain.Entities;
 using IdentityDemo.Web.Views.Account;
 using IdentityDemo.Web.Views.Car;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -46,6 +47,7 @@ namespace IdentityDemo.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Administrator")]
         [HttpPost("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {

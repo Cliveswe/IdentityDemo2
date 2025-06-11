@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace IdentityDemo.Application.Users;
 public class UserService(IIdentityUserService identityUserService) : IUserService
 {
+    public async Task<UserProfileDto?> GetUserByIdAsync(string userId) =>
+        await identityUserService.GetUserByIdAsync(userId);
     public async Task<UserResultDto> CreateUserAsync(UserProfileDto user, string password) =>
         await identityUserService.CreateUserAsync(user, password);
 

@@ -4,23 +4,40 @@
     ViewBag.Title = "Create car";
 }
 
-<form asp-controller="Car" asp-action="Create">
-    <label asp-for="Make"></label>
-    <input asp-for="Make" />
-    <span asp-validation-for="Make"></span>
+<div class="container">
+    <div class="mb-3">
+        <h3>Create new Car</h3>
 
-    <label asp-for="Model"></label>
-    <input asp-for="Model" />
-    <span asp-validation-for="Model"></span>
-    <br />
+        <form asp-controller="Car" asp-action="Create">
+            <div class="mb-3">
+                <label class="form-label" asp-for="Make"></label>
+                <input class="form-control" asp-for="Make" />
+                <span class="text-danger" asp-validation-for="Make"></span>
+            </div>
 
-    <label asp-for="Year"></label>
-    <input asp-for="Year" />
-    <span asp-validation-for="Year"></span>
-    <br />
-    <input type="submit" value="Save" />
-    <div asp-validation-summary="All"></div>
-</form>
+            <div class="mb-3">
+                <label class="form-label" asp-for="Model"></label>
+                <input class="form-control" asp-for="Model" />
+                <span class="text-danger" asp-validation-for="Model"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Year"></label>
+                <input class="form-control" asp-for="Year" />
+                <span class="text-danger" asp-validation-for="Year"></span>
+            </div>
+            
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Save" />
+            </div>
+
+            <div class="mb-3">
+                <div class="text-danger" asp-validation-summary="All"></div>
+            </div>
+
+        </form>
+    </div>
+</div>
 
 @section scripts
 {

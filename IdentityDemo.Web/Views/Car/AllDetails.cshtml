@@ -4,17 +4,44 @@
     ViewBag.Title = "All Cars";
 }
 
-<div>
-    <ul>
-    @foreach (var car in Model.CarVMs)
-    {
-        <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
-            <li>
-                @car.Make<br/>
-                @car.Model<br/>
-                @car.Year<br/>
-            </li>
-        </a>
-    }
-    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-striped table-hover align-middle">
+                <thead>
+                    <tr>
+                        <th>Make</th>
+                        <th>Model</th>
+                        <th>Year</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    @foreach (var car in Model.CarVMs)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
+                                    @car.Make
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
+                                    @car.Model
+                                </a>
+                            </td>
+                            <td>
+                                <a asp-controller="Car" asp-action="Details" asp-route-id="@car.Id">
+                                    @car.Year
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <br />
+            <p>
+                <a asp-controller="Car" asp-action="Create" class="btn btn-primary">Create new car</a>
+            </p>
+        </div>
+    </div>
 </div>

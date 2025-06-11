@@ -7,6 +7,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace IdentityDemo.Terminal;
 
+/// <summary>
+/// Represents the entry point of the Car Management System application.
+/// </summary>
+/// <remarks>This class contains the <c>Main</c> method, which initializes the application, configures
+/// dependencies, and starts the main application loop. It is responsible for setting up the database context,
+/// repositories, and services required for the application's functionality.</remarks>
 internal class Program
 {
     static CarService carService = null!;
@@ -50,6 +56,9 @@ internal class Program
                 case "2":
                 GetCarByID().GetAwaiter().GetResult();
                 break;
+                case "3":
+                DeleteCarByID().GetAwaiter().GetResult();
+                break;
                 case "0":
                 Environment.Exit(0);
                 break;
@@ -60,6 +69,62 @@ internal class Program
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
         }
+    }
+
+    /// <summary>
+    /// Deletes a car from the system based on the provided car ID.
+    /// </summary>
+    /// <remarks>Prompts the user to enter a car ID, validates the input, and attempts to delete the car with
+    /// the specified ID. If the car is not found, an error message is displayed. If the input is invalid, the user is
+    /// notified.</remarks>
+    /// <returns></returns>
+    private static async Task DeleteCarByID() {
+
+        bool flowControl = await IsListEmpty();
+        if(!flowControl) {
+            return;
+        }
+
+        "Enter Car ID: ".DisplayTitle();
+        var input = Console.ReadLine();
+
+        if(int.TryParse(input, out int id)) {
+            try {
+                var car = await carService.GetByIdAsync(id);
+
+                if(car is null) {
+                    "Car not found.".DisplayErrorMessage();
+                    return;
+                }
+
+                DisplayCarDetails(car);
+                await carService.DeleteAsync(id);
+                "Car deleted successfully.".DisplaySuccessMessage();
+
+            } catch(ArgumentException ex) {
+                $"Could not find the car with id: {id}".DisplayErrorMessage();
+                ex.Message.DisplayErrorMessage();
+            }
+        }
+        else {
+            "Invalid ID format. Please enter a valid integer.".DisplayErrorMessage();
+        }
+    }
+
+    /// <summary>
+    /// Determines whether the list of cars retrieved from the service is empty.
+    /// </summary>
+    /// <remarks>If the list is empty, an informational message is displayed to the user.</remarks>
+    /// <returns><see langword="true"/> if the list contains one or more cars; otherwise, <see langword="false"/>.</returns>
+    private static async Task<bool> IsListEmpty() {
+        int cars = (await carService.GetAllAsync()).Length; // Fix: Await the Task and then access Length
+
+        if(cars == 0) {
+            "No cars available to delete.".DisplayInfoMessage();
+            return false;
+        }
+
+        return true;
     }
 
     /// <summary>
@@ -74,18 +139,25 @@ internal class Program
         "\n------------------------------".DisplayInfoMessage();
         "1. List All Cars".DisplayStandardMessage();
         "2. Get Car By ID".DisplayStandardMessage();
+        "3. Delete Car By ID".DisplayStandardMessage();
         "0. Exit".DisplayStandardMessage();
         "\n------------------------------".DisplayInfoMessage();
+        Console.Write("Enter choice: ");
     }
 
     /// <summary>
-    /// Retrieves and displays the details of a car based on the provided car ID.
+    /// Retrieves and displays the details of a car by its unique identifier.
     /// </summary>
     /// <remarks>Prompts the user to enter a car ID, validates the input, and attempts to retrieve the car
-    /// details using the car service. If the car is found, its details are displayed. If the car is not found or an
-    /// invalid ID is provided, an appropriate error message is displayed.</remarks>
+    /// details  asynchronously. If the car is found, its details are displayed. If the car is not found or the input 
+    /// is invalid, appropriate error messages are shown.</remarks>
     /// <returns></returns>
     private static async Task GetCarByID() {
+
+        bool flowControl = await IsListEmpty();
+        if(!flowControl) {
+            return;
+        }
 
         "Enter Car ID: ".DisplayTitle();
         var input = Console.ReadLine();
@@ -121,13 +193,18 @@ internal class Program
 
         "List of Cars".DisplayBoldText();
         "\n------------------------------".DisplayInfoMessage();
+        var Cars = await carService.GetAllAsync();
 
-        foreach(Car item in await carService.GetAllAsync()) {
+        //foreach(Car item in await carService.GetAllAsync()) {
+        foreach(Car item in Cars) {
 
             DisplayCarDetails(item);
             Console.WriteLine("");
-        }
 
+        }
+        if(Cars.Length == 0) {
+            "No cars found.".DisplayInfoMessage();
+        }
         "------------------------------".DisplayInfoMessage();
     }
 

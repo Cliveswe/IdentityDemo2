@@ -1,5 +1,13 @@
 ﻿namespace IdentityDemo.Extensions;
 
+/// <summary>
+/// Provides extension methods for displaying formatted messages in the console.
+/// </summary>
+/// <remarks>The <see cref="ConsoleExtensions"/> class includes a variety of methods for writing messages to the
+/// console with specific formatting, such as bold text, colored text, or standard output. These methods are designed to
+/// enhance the readability of console output and improve user experience.   Note that some methods rely on console
+/// features such as ANSI escape codes or color settings, which may not be supported in all environments. Ensure that
+/// the target console supports these features before using the corresponding methods.</remarks>
 public static class ConsoleExtensions
 {
     /// <summary>

@@ -1,32 +1,50 @@
 ﻿@using IdentityDemo.Web.Views.Account
 @model RegisterVM
+
+@{
+    ViewData["Title"] = "Register";
+    ViewData["BodyClass"] = "register-bg"; // 👈 Adds car background to this page only
+}
+
 <h3>Register</h3>
-<form asp-controller="Account" asp-action="Register">
-    <label asp-for="FirstName"></label>
-    <input asp-for="FirstName" />
-    <span asp-validation-for="FirstName"></span>
 
-    <label asp-for="LastName"></label>
-    <input asp-for="LastName" />
-    <span asp-validation-for="LastName"></span>
+<form asp-controller="Account" asp-action="Register" class="mx-auto" style="max-width: 500px; background-color: rgba(255, 255, 255, 0.8); padding: 1.5rem; border-radius: 0.5rem;">
+    <div class="mb-3">
+        <label asp-for="FirstName" class="form-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
 
-    <label asp-for="Email"></label>
-    <input asp-for="Email" />
-    <span asp-validation-for="Email"></span>
-    
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password"></span>
+    <div class="mb-3">
+        <label asp-for="LastName" class="form-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
 
-    <label asp-for="PasswordRepeat"></label>
-    <input asp-for="PasswordRepeat" />
-    <span asp-validation-for="PasswordRepeat"></span>
-    <br />
-    <input type="submit" value="Register" />
-    <div asp-validation-summary="All"></div>
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label"></label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="PasswordRepeat" class="form-label"></label>
+        <input asp-for="PasswordRepeat" type="password" class="form-control" />
+        <span asp-validation-for="PasswordRepeat" class="text-danger"></span>
+    </div>
+
+    <input class="btn btn-primary" type="submit" value="Register" />
+
+    <div asp-validation-summary="All" class="text-danger mt-3"></div>
 </form>
-@section scripts
-{
+
+@section scripts {
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"
             asp-fallback-src="~/scripts/jquery/jquery.min.js"
             asp-fallback-test="window.jQuery">

@@ -1,11 +1,18 @@
-﻿<h3>Admin</h3>
-@if (User.Identity!.IsAuthenticated)
-{
-    <p>
-        Welcome <strong>@User.Identity!.Name</strong>!
-    </p>
+﻿@{
+    ViewBag.Title = "Admin";
 }
-else
-{
-    <p>Du är inte inloggad som Admin!</p>
-}
+
+<div class="container mt-4">
+    <h3 class="text-primary">Admin</h3>
+
+    @if (User.Identity!.IsAuthenticated)
+    {
+        <p>
+            Welcome <strong>@User.Identity.Name</strong>!
+        </p>
+    }
+    else
+    {
+        <p>Du är inte inloggad...</p>
+    }
+</div>

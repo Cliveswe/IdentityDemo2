@@ -59,7 +59,6 @@ internal class Program
             }
             Console.WriteLine("\nPress any key to continue...");
             Console.ReadKey();
-            DisplayMenu();
         }
     }
 
@@ -75,7 +74,7 @@ internal class Program
         "\n------------------------------".DisplayInfoMessage();
         "1. List All Cars".DisplayStandardMessage();
         "2. Get Car By ID".DisplayStandardMessage();
-        "3. Exit".DisplayStandardMessage();
+        "0. Exit".DisplayStandardMessage();
         "\n------------------------------".DisplayInfoMessage();
     }
 

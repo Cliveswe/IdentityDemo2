@@ -67,7 +67,8 @@ namespace IdentityDemo.Web.Controllers
             };
 
             await carService.AddAsync(model);
-            return View();
+            
+            return RedirectToAction("AllDetails");
         }
     }
 }

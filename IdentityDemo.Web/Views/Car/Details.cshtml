@@ -3,10 +3,12 @@
 @{
     ViewBag.Title = "Car Details";
 }
-<div>
-    <ul>
-        <li>@Model.Make</li>
-        <li>@Model.Model</li>
-        <li>@Model.Year</li>
-    </ul>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2><strong>Make:</strong> @Model.Make</h2>
+            <h3><strong>Model:</strong> @Model.Model</h3>
+            <h3><strong>Year:</strong> @Model.Year</h3>
+        </div>
+    </div>
 </div>

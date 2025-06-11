@@ -7,5 +7,6 @@ namespace IdentityDemo.Application.Cars
         Task AddAsync(Car car);
         Task<Car[]> GetAllAsync();
         Task<Car> GetByIdAsync(int id);
+        Task DeleteAsync(int id);
     }
 }

@@ -46,6 +46,21 @@ namespace IdentityDemo.Web.Controllers
             return View(viewModel);
         }
 
+        [HttpPost("delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await carService.DeleteAsync(id);
+            }
+            catch (ArgumentException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+            }
+
+            return RedirectToAction(nameof(AllDetails));
+        }
+
         [HttpGet("create")]
         public IActionResult Create()
         {
@@ -67,7 +82,7 @@ namespace IdentityDemo.Web.Controllers
             };
 
             await carService.AddAsync(model);
-            
+
             return RedirectToAction("AllDetails");
         }
     }

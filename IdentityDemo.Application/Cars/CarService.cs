@@ -22,5 +22,13 @@ namespace IdentityDemo.Application.Cars
                 throw new ArgumentException($"Invalid parameter value: {id}", nameof(id)) :
                 car;
         }
+
+        public async Task DeleteAsync(int id)
+        {
+            var car = await GetByIdAsync(id);
+            if (car is null)
+                throw new ArgumentException($"Invalid parameter value: {id}", nameof(id));
+            await unitOfWork.Cars.DeleteAsync(car);
+        }
     }
 }

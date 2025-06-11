@@ -34,6 +34,17 @@
                                     @car.Year
                                 </a>
                             </td>
+                            <td style="width: 1%;">
+                                <form asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id" method="post" style="display:inline; float: right;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                                @if (TempData["ErrorMessage"] != null)
+                                {
+                                    <div class="alert alert-danger">
+                                        @TempData["ErrorMessage"]
+                                    </div>
+                                }
+                            </td>
                         </tr>
                     }
                 </tbody>

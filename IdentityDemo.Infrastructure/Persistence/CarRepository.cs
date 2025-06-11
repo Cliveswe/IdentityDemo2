@@ -22,5 +22,14 @@ namespace IdentityDemo.Infrastructure.Persistence
 
         public async Task<Car?> GetByIdAsync(int id) => await context.Cars
             .FindAsync(id);
+
+        public async Task DeleteAsync(Car car)
+        {
+            if (car is not null)
+            {
+                context.Cars.Remove(car);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

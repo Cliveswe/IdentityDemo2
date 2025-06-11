@@ -1,16 +1,36 @@
 ﻿@using IdentityDemo.Web.Views.Account
 @model LoginVM
 
-<h3>Log In</h3>
-<form asp-controller="Account" asp-action="Login">
-    <label asp-for="Username"></label>
-    <input asp-for="Username" />
-    <span asp-validation-for="Username"></span>
-    
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password"></span>
-    <br />
-    <input type="submit" value="Log In" />
-</form>
-<div asp-validation-summary="All"></div>
+<div class="container">
+    <h3>Log In</h3>
+    <div class="form-signin mb-3 mt-3">
+        <form asp-controller="Account" asp-action="Login">
+            <div class="mb-3 mt-3">
+                <label class="form-label" asp-for="Username"></label>
+                <input class="form-control" asp-for="Username" />
+                <span asp-validation-for="Username" class="text-danger validation-message-space"></span>
+            </div>
+            <div class="mb-3 mt-3">
+                <label class="form-label" asp-for="Password"></label>
+                <input class="form-control" asp-for="Password" />
+                <span asp-validation-for="Password" class="text-danger validation-message-space"></span>
+            </div>
+            <br />
+            <div class="mb-3 mt-3">
+                <input class="btn btn-primary" type="submit" value="Log In" />
+            </div>
+        </form>
+        <div asp-validation-summary="All" class="text-danger validation-message-space"></div>
+    </div>
+</div>
+@section Scripts {
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.1.min.js"
+            asp-fallback-src="/scripts/lib/jquery/jquery.min.js"></script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.2/jquery.validate.min.js"
+            asp-fallback-src="/scripts/lib/jquery-validate/jquery.validate.min.js"></script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"
+            asp-fallback-src="/scripts/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

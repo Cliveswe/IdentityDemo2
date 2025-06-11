@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityDemo.Application.Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityDemo.Web.Tests", "IdentityDemo.Web.Tests\IdentityDemo.Web.Tests.csproj", "{29EB3A55-D36B-4B00-9ED3-C101E2BB8803}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityDemo.Extensions", "IdentityDemo.Extensions\IdentityDemo.Extensions.csproj", "{0358933F-72E4-4C16-B2D7-F596D38826E7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{29EB3A55-D36B-4B00-9ED3-C101E2BB8803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29EB3A55-D36B-4B00-9ED3-C101E2BB8803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29EB3A55-D36B-4B00-9ED3-C101E2BB8803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0358933F-72E4-4C16-B2D7-F596D38826E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0358933F-72E4-4C16-B2D7-F596D38826E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0358933F-72E4-4C16-B2D7-F596D38826E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0358933F-72E4-4C16-B2D7-F596D38826E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

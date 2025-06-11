@@ -25,7 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IdentityDemo.Extensions\IdentityDemo.Extensions.csproj" />
     <ProjectReference Include="..\IdentityDemo.Infrastructure\IdentityDemo.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

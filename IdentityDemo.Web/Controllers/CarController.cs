@@ -1,11 +1,8 @@
 ﻿using IdentityDemo.Application.Cars;
 using IdentityDemo.Domain.Entities;
-using IdentityDemo.Web.Views.Account;
 using IdentityDemo.Web.Views.Car;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace IdentityDemo.Web.Controllers
 {
@@ -13,12 +10,10 @@ namespace IdentityDemo.Web.Controllers
     public class CarController(ICarService carService) : Controller
     {
         [HttpGet("details/{id}")]
-        public async Task<IActionResult> Details(int id)
-        {
+        public async Task<IActionResult> Details(int id) {
             var car = await carService.GetByIdAsync(id);
 
-            var viewModel = new DetailsVM
-            {
+            var viewModel = new DetailsVM {
                 Make = car!.Make,
                 Model = car.Model,
                 Year = car.Year
@@ -28,12 +23,10 @@ namespace IdentityDemo.Web.Controllers
         }
 
         [HttpGet("details")]
-        public async Task<IActionResult> AllDetails()
-        {
+        public async Task<IActionResult> AllDetails() {
             var cars = await carService.GetAllAsync();
 
-            var viewModel = new AllDetailsVM()
-            {
+            var viewModel = new AllDetailsVM() {
                 CarVMs = [.. cars
                     .Select(c => new AllDetailsVM.CarVM()
                     {
@@ -49,35 +42,39 @@ namespace IdentityDemo.Web.Controllers
 
         [Authorize(Roles = "Administrator")]
         [HttpPost("delete/{id}")]
-        public async Task<IActionResult> Delete(int id)
-        {
-            try
-            {
+        public async Task<IActionResult> Delete(int id) {
+            try {
                 await carService.DeleteAsync(id);
-            }
-            catch (ArgumentException ex)
-            {
+            } catch(ArgumentException ex) {
                 TempData["ErrorMessage"] = ex.Message;
             }
 
             return RedirectToAction(nameof(AllDetails));
         }
 
+        private int CurrentYear => DateTime.Now.Year;
+        private IEnumerable<int> GetYearRange => Enumerable.Range(1920, CurrentYear - 1920 + 2).Reverse();
+
+
         [HttpGet("create")]
-        public IActionResult Create()
-        {
-            //throw new Exception("test");
-            return View();
+        public IActionResult Create() {
+            var viewModel = new CreateVM {
+                Make = string.Empty, // Initialize required property
+                Model = string.Empty, // Initialize required property
+                Year = CurrentYear, // Initialize required property
+                YearOptions = GetYearRange
+            };
+            return View(viewModel);
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create(CreateVM viewModel)
-        {
-            if (!ModelState.IsValid)
-                return View();
+        public async Task<IActionResult> Create(CreateVM viewModel) {
+            viewModel.YearOptions = GetYearRange;
 
-            var model = new Car
-            {
+            if(!ModelState.IsValid)
+                return View(viewModel);
+
+            var model = new Car {
                 Make = viewModel.Make,
                 Model = viewModel.Model,
                 Year = viewModel.Year

@@ -23,7 +23,7 @@
 
             <div class="mb-3">
                 <label class="form-label" asp-for="Year"></label>
-                <input class="form-control" asp-for="Year" />
+                <select class="form-control" asp-for="Year" asp-items="@(new SelectList(Model.YearOptions))"></select>
                 <span class="text-danger" asp-validation-for="Year"></span>
             </div>
             

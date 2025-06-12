@@ -2,7 +2,9 @@
 using IdentityDemo.Domain.Entities;
 using IdentityDemo.Web.Controllers;
 using IdentityDemo.Web.Views.Car;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Moq;
 
 namespace IdentityDemo.Web.Tests;
@@ -75,16 +77,34 @@ public class CarControllerTests
 
         var car = new Car() { Make = carVM.Make, Model = carVM.Model, Year = carVM.Year };
 
-        mockCarService.Setup(s => s.AddAsync(car));
+        mockCarService.Setup(s => s.AddAsync(car)).Returns(Task.CompletedTask);
 
         // Act
         var result = await carController.Create(carVM);
 
         // Assert
 
-        var viewResult = Assert.IsType<ViewResult>(result);
+        var viewResult = Assert.IsType<RedirectToActionResult>(result);
         Assert.NotNull(viewResult);
         mockCarService.Verify(s => s.AddAsync(It.Is<Car>
             (c => c.Make == carVM.Make && c.Model == carVM.Model && c.Year == carVM.Year)), Times.Once);
+    }
+
+    [Fact]
+    public async Task Delete_WithValidId_ReturnsRedirectToActionResult()
+    {
+        // Arrange
+        var carServiceMock = new Mock<ICarService>();
+        carServiceMock.Setup(service => service.DeleteAsync(It.IsAny<int>())).Returns(Task.CompletedTask);
+
+        var controller = new CarController(carServiceMock.Object);
+
+        // Act
+        var result = await controller.Delete(1) as RedirectToActionResult;
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(nameof(controller.AllDetails), result.ActionName);
+        carServiceMock.Verify(service => service.DeleteAsync(1), Times.Once);
     }
 }

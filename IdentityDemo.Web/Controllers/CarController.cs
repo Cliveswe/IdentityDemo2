@@ -52,7 +52,13 @@ namespace IdentityDemo.Web.Controllers
             return RedirectToAction(nameof(AllDetails));
         }
 
+        /// <summary>
+        /// Gets the current year based on the system's local date and time.
+        /// </summary>
         private int CurrentYear => DateTime.Now.Year;
+        /// <summary>
+        /// Gets a collection of years starting from 1920 up to two years beyond the current year, in descending order.
+        /// </summary>
         private IEnumerable<int> GetYearRange => Enumerable.Range(1920, CurrentYear - 1920 + 2).Reverse();
 
 

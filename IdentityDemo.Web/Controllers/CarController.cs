@@ -56,26 +56,19 @@ namespace IdentityDemo.Web.Controllers
         /// Gets the current year based on the system's local date and time.
         /// </summary>
         private int CurrentYear => DateTime.Now.Year;
-        /// <summary>
-        /// Gets a collection of years starting from 1920 up to two years beyond the current year, in descending order.
-        /// </summary>
-        private IEnumerable<int> GetYearRange => Enumerable.Range(1920, CurrentYear - 1920 + 2).Reverse();
-
 
         [HttpGet("create")]
         public IActionResult Create() {
-            var viewModel = new CreateVM {
+            var viewModel = new CreateVM() {
                 Make = string.Empty, // Initialize required property
                 Model = string.Empty, // Initialize required property
-                Year = CurrentYear, // Initialize required property
-                YearOptions = GetYearRange
+                Year = CurrentYear // Initialize required property
             };
             return View(viewModel);
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create(CreateVM viewModel) {
-            viewModel.YearOptions = GetYearRange;
 
             if(!ModelState.IsValid)
                 return View(viewModel);

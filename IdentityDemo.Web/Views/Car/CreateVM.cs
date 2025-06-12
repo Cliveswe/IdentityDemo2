@@ -16,5 +16,18 @@ namespace IdentityDemo.Web.Views.Car
         public required int Year { get; set; }
 
         public IEnumerable<int> YearOptions { get; set; } = Enumerable.Empty<int>();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CreateVM"/> class and sets up default values for year-related
+        /// properties.
+        /// </summary>
+        /// <remarks>The constructor initializes the <see cref="YearOptions"/> property with a range of
+        /// years from 1920 to the current year,  inclusive, in descending order. The <see cref="Year"/> property is set
+        /// to the current year by default.</remarks>
+        public CreateVM() {
+            int currentYear = DateTime.Now.Year;
+            YearOptions = Enumerable.Range(1920, currentYear - 1920 + 2).Reverse();
+
+        }
     }
 }

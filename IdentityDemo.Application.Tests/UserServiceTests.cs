@@ -57,5 +57,30 @@ namespace IdentityDemo.Application.Tests
 
             mockIdentityUserService.Verify(s => s.SignOutAsync(), Times.Once);
         }
+
+        [Fact]
+        public async Task GetUserByIdAsync_ValidUserId_ShouldReturnUserProfileDto()
+        {
+
+            // Arrange
+            var userId = "12345";
+            var expectedUser = new UserProfileDto("test@email.com", "John", "Doe");
+            var identityUserServiceMock = new Mock<IIdentityUserService>();
+            var userService = new UserService(identityUserServiceMock.Object);
+
+            identityUserServiceMock.Setup(service => service.GetUserByIdAsync(userId))
+                .ReturnsAsync(expectedUser);
+            // Act
+            var result = await userService.GetUserByIdAsync(userId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.IsType<UserProfileDto>(result);
+            Assert.Equal(expectedUser.Email, result.Email);
+            Assert.Equal(expectedUser.FirstName, result.FirstName);
+            Assert.Equal(expectedUser.LastName, result.LastName);
+            identityUserServiceMock.Verify(service => service.GetUserByIdAsync(userId), Times.Once);
+        }
     }
 }
+

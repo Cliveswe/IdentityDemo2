@@ -55,7 +55,7 @@ namespace IdentityDemo.Web.Controllers
         /// <summary>
         /// Gets the current year based on the system's local date and time.
         /// </summary>
-        private int CurrentYear => DateTime.Now.Year;
+        private static int CurrentYear => DateTime.Now.Year;
 
         [HttpGet("create")]
         public IActionResult Create() {

@@ -10,6 +10,6 @@
             public string Model { get; set; } = string.Empty;
             public int Year { get; set; }
         }
-        public CarVM[] CarVMs { get; set; } = Array.Empty<CarVM>();
+        public CarVM[] CarVMs { get; set; } = [];
     }
 }

@@ -1,4 +1,6 @@
-﻿using IdentityDemo.Application.Dtos;
+﻿// Ignore Spelling: Dto
+
+using IdentityDemo.Application.Dtos;
 using IdentityDemo.Application.Users;
 using Moq;
 
@@ -7,8 +9,7 @@ namespace IdentityDemo.Application.Tests
     public class UserServiceTests
     {
         [Fact]
-        public async Task CreateUserAsync_WithDtoAndPassword()
-        {
+        public async Task CreateUserAsync_WithDtoAndPassword() {
             // Arrange
             var mockIdentityUserService = new Mock<IIdentityUserService>();
             var userService = new UserService(mockIdentityUserService.Object);
@@ -25,8 +26,7 @@ namespace IdentityDemo.Application.Tests
         }
 
         [Fact]
-        public async Task SignInAsync_ValidEmailAndPassword()
-        {
+        public async Task SignInAsync_ValidEmailAndPassword() {
             // Arrange
             var mockIdentityUserService = new Mock<IIdentityUserService>();
             var userService = new UserService(mockIdentityUserService.Object);
@@ -44,8 +44,7 @@ namespace IdentityDemo.Application.Tests
         }
 
         [Fact]
-        public async Task SignOutAsync_Test()
-        {
+        public async Task SignOutAsync_Test() {
             // Arrange
             var mockIdentityUserService = new Mock<IIdentityUserService>();
             var userService = new UserService(mockIdentityUserService.Object);
@@ -59,8 +58,7 @@ namespace IdentityDemo.Application.Tests
         }
 
         [Fact]
-        public async Task GetUserByIdAsync_ValidUserId_ShouldReturnUserProfileDto()
-        {
+        public async Task GetUserByIdAsync_ValidUserId_ShouldReturnUserProfileDto() {
 
             // Arrange
             var userId = "12345";

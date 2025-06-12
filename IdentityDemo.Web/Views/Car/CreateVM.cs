@@ -15,7 +15,7 @@ namespace IdentityDemo.Web.Views.Car
         [Required(ErrorMessage = "You must specify a Year")]
         public required int Year { get; set; }
 
-        public IEnumerable<int> YearOptions { get; set; } = Enumerable.Empty<int>();
+        public IEnumerable<int> YearOptions { get; set; } = [];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreateVM"/> class and sets up default values for year-related
